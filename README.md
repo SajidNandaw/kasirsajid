@@ -9,5 +9,3 @@ Instruksi singkat:
 5. Login default:
    - admin: `admin / admin123`
    - kasir: `kasir1 / kasir123`
-
-Catatan keamanan: file ini menyimpan password dalam bentuk plaintext hanya sesuai permintaan; sebaiknya setelah berhasil, ganti ke `password_hash()` untuk keamanan.
