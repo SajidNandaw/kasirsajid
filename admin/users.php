@@ -1,15 +1,20 @@
 <?php
 require_once __DIR__ . '/../config.php';
 require_role('admin');
-$title = 'Manajemen Users';
-require '../includes/header.php';
 
+$title = 'Manajemen Users';
+
+// ==============================
+// LOGIKA TAMBAH / HAPUS USER
+// ==============================
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     $u = trim($_POST['username']);
     $p = trim($_POST['password']);
     $role = $_POST['role'];
+
     $stmt = $pdo->prepare('INSERT INTO users (username,password,role) VALUES (?,?,?)');
-    $stmt->execute([$u,$p,$role]);
+    $stmt->execute([$u, $p, $role]);
+
     header('Location: users.php');
     exit;
 }
@@ -21,7 +26,15 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-$users = $pdo->query('SELECT id_user,username,role FROM users')->fetchAll(PDO::FETCH_ASSOC);
+// ==============================
+// AMBIL DATA USER
+// ==============================
+$users = $pdo->query('SELECT id_user, username, role FROM users')->fetchAll(PDO::FETCH_ASSOC);
+
+// ==============================
+// LOAD HEADER
+// ==============================
+require '../includes/header.php';
 ?>
 
 <style>
