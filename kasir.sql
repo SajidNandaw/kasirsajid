@@ -1,4 +1,3 @@
--- kasir.sql
 CREATE DATABASE IF NOT EXISTS kasir DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE kasir;
 
@@ -20,7 +19,8 @@ CREATE TABLE barang (
   kode_barang VARCHAR(50) NOT NULL UNIQUE,
   nama_barang VARCHAR(255) NOT NULL,
   harga DECIMAL(12,2) NOT NULL DEFAULT 0,
-  stok INT NOT NULL DEFAULT 0
+  stok INT NOT NULL DEFAULT 0,
+  is_active TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE transaksi (
@@ -41,7 +41,6 @@ CREATE TABLE transaksi_detail (
   FOREIGN KEY (id_barang) REFERENCES barang(id_barang)
 );
 
--- optional tabel pelanggan (jika mau kelola daftar pelanggan)
 CREATE TABLE pelanggan (
   id_pelanggan INT AUTO_INCREMENT PRIMARY KEY,
   nama VARCHAR(255),
@@ -49,13 +48,11 @@ CREATE TABLE pelanggan (
   telepon VARCHAR(50)
 );
 
--- sample users (plaintext passwords sesuai permintaan)
 INSERT INTO users (username,password,role) VALUES
 ('admin','admin123','admin'),
 ('kasir1','kasir123','kasir');
 
--- sample barang
-INSERT INTO barang (kode_barang,nama_barang,harga,stok) VALUES
-('B001','Pulpen',1500.00,100),
-('B002','Buku Tulis',5000.00,50),
-('B003','Penghapus',1000.00,200);
+INSERT INTO barang (kode_barang,nama_barang,harga,stok,is_active) VALUES
+('B001','Pulpen',1500.00,100,1),
+('B002','Buku Tulis',5000.00,50,1),
+('B003','Penghapus',1000.00,200,1);
